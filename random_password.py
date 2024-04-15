@@ -1,14 +1,24 @@
+import pyfiglet
 import random
+from colorama import Fore, Back, Style
 
-characters = "0123456789`~!@#$%^&*()-_=+[{]}|;:,<.>/?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-password_lenght = int(input("Cate caratre doriti sa aiba parola ?"))
-generate = []
+text = "Password Generator"
+ascii_art = pyfiglet.figlet_format(text)
+characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_=+[{]}\|;:"
 
-for character in characters:
-    generate.extend(random.sample(character, password_lenght))
+while True:
+    try:
+        length = int(input("How long do you want the password to be ? ( Please enter only a number ) :  "))
+        if length < 6 or length > 32:
+            print("Ce plm e cu parola asta")
+            continue
+        randomItems = random.choices(characters, k=length) 
+        break
+    except ValueError:
+        print("Please enter a number !!!!")
+        continue
 
-finnal_password = "".join(generate)
+password = Back.BLACK +  Fore.MAGENTA + "Your password is :" + Fore.RED + "".join(randomItems) + Style.RESET_ALL
 
-print(f"Your password is : {finnal_password}")
-
-
+print(ascii_art)
+print(password)
